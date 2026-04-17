@@ -1,0 +1,106 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "✅ This AI News agent is ready to use. Chat with it! \n✨ We gave you free OpenAI credits\n💡 Learn [how to build](https://n8n.io/workflows/6270-build-your-first-ai-agent/) your own agent  ",
+        "height": 80,
+        "width": 448,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -208
+      ],
+      "id": "052068ba-ea50-4521-9946-63ded13b23b0",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ctf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        -80
+      ],
+      "id": "7f97bf10-dae7-4998-96da-5ce6c163ae00",
+      "name": "Webhook",
+      "webhookId": "e2ca823b-1c7d-4fd4-870e-d10bd77bbe66"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  log: {\n    id: \"log_\" + Date.now(),\n    event: \"flag_captured\",\n    user: $input.first().json.body.user_id,\n    flag: $input.first().json.body.flag_no,\n    timestamp: new Date().toLocaleString(\"sv-SE\", {\n      timeZone: \"Asia/Kolkata\",\n      hour12: false\n    })\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -128,
+        160
+      ],
+      "id": "4079d84d-ccc3-484f-8f71-fba842f1d9b5",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.DASHBOARD_API_URL }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"success\": true,\n    \"log\": {\n      \"id\": \"{{ $json.log.id }}\",\n      \"event\": \"{{ $json.log.event }}\",\n      \"flag\": \"{{ $json.log.flag }}\",\n      \"user\": \"{{ $json.log.user }}\",\n      \"timestamp\": \"{{ $json.log.timestamp }}\"\n    }\n  }\n] ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        144,
+        -64
+      ],
+      "id": "f0f983f8-d0f5-405b-a9f0-b1bd8824a536",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "501fed2e-7e6d-454e-bbb9-6af20cbd5b51",
+  "meta": {
+    "templateId": "ready-to-run-ai-workflow-v5",
+    "instanceId": "b7db10cfa98200aba34b8a02710555afdd68c491521a4dedabd8a847423b27e5"
+  },
+  "id": "hY0gyCtebLfYPzxS",
+  "tags": []
+}

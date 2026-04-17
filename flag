@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Load environment variables
+if [ -f "$(dirname "$0")/.env" ]; then
+    source "$(dirname "$0")/.env"
+else
+    echo "Error: .env file not found. Please create one from .env.example"
+    exit 1
+fi
+
+if [ "$1" == "-d" ]; then
+    USER_ID=$2
+    WEBHOOK_URL="$N8N_WEBHOOK_URL"
+    # This sends data to your n8n workflow
+    curl -X POST -H "Content-Type: application/json" \
+         -d "{\"user_id\": \"$USER_ID\", \"flag_no\": \"flag-1\"}" \
+         "$WEBHOOK_URL"
+    echo "SUCCESS: Flag for User $USER_ID sent to n8n."
+else
+    echo "Usage: flag -d <id>"
+fi
