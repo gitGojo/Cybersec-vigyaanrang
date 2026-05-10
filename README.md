@@ -3,7 +3,6 @@
 This repository represents the collaborative effort of our team to build a complete, real-time security monitoring and event-handling pipeline. We have successfully linked an **Ubuntu OS** terminal environment to a **Web Dashboard** and **Discord Alerting** system.
 
 ## 🌐 Project Links
-- **Live Web Dashboard:** [View Results Here](https://rail-approx-percent-changing.trycloudflare.com/)
 - **Team Repositories:** 
   - [Benjamin's Repo](https://github.com/bchbenjamin/ctf-vigyaanrang)
   - [Jitesh's Repo](https://github.com/Itz-Jitesh/vigyarang)
@@ -38,7 +37,7 @@ We have built a "Digital Guard" that manages two main security tasks:
 To verify the system is working:
 
 1. **Update Dashboard:** 
-   Run `flag -d 555555`. Check the [Live Dashboard](https://rail-approx-percent-changing.trycloudflare.com/) to see User 555555 appear.
+   Run `flag -d 555555`. Check the [Live Dashboard]to see User 555555 appear.
    
 2. **Trigger Discord Alert:** 
    Run `rm ~/players/user_123/1.txt`. Check your Discord for the "🚨 SECURITY ALERT" notification
